@@ -15,6 +15,11 @@ import SwiftUI
 
 struct ContentView: View {
     
+    func resetGame() {
+        scoreCount = 0
+        numbersTapped = 0
+    }
+    
     @State private var showingScore = false
     @State private var scoreTitle = ""
     @State private var scoreCount = 0
@@ -124,9 +129,10 @@ struct ContentView: View {
                 }
                 
                 .alert(scoreTitle, isPresented: $showEndGameAlert) {
-                    Button("End game", action: backToMenu)
-                } message: {
-                    Text("Finish! your endscore is \(scoreCount)")
+                    Button("End game") {
+                        resetGame()
+                        backToMenu()
+                    }
                 }
             }
         }
@@ -161,6 +167,7 @@ struct ContentView: View {
     
     func backToMenu() {
         showMenu = true
+        showEndGameAlert = false
     }
 }
     
